@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fabfb60ab1ecb74e83195629b9a2d14, type: 3}
+  m_Name: Blue
+  m_EditorClassIdentifier: 
+  BasePrefab: {fileID: 6025534205366922360, guid: e7e707a7c662c6d4dbf8ecfa1fbc84bb, type: 3}
+  ExposionPrefab: {fileID: 6807412717384743812, guid: 6924e6802a5d235409bcd657fb538c54, type: 3}
+  BonusPrefab: {fileID: 1257180875399772206, guid: 22aaa015b786f9f4f9faca349b72f30e, type: 3}

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fabfb60ab1ecb74e83195629b9a2d14, type: 3}
+  m_Name: Orange
+  m_EditorClassIdentifier: 
+  BasePrefab: {fileID: 6025534205366922360, guid: e3fb1ad7af9e5d4478d58c391ce00c51, type: 3}
+  ExposionPrefab: {fileID: 6807412717384743812, guid: 11119e1a88451b44bbb388e5d9728119, type: 3}
+  BonusPrefab: {fileID: 1257180875399772206, guid: f4b2a9a82de173f43b523f30eee3dee9, type: 3}
