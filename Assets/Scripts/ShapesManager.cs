@@ -7,7 +7,7 @@ using TMPro;
 public class ShapesManager : MonoBehaviour
 {
     public static ShapesManager Instance;
-    
+
     public TMP_Text ScoreText;
 
     public ShapesArray shapes;
@@ -20,7 +20,7 @@ public class ShapesManager : MonoBehaviour
 
     public CandyObject[] CandyObjects;
 
-    public readonly Vector2 BottomRight = new Vector2(-2.37f, -4.27f);
+    public readonly Vector2 BottomRight = new Vector2(-2.14f, -4.27f);
     public readonly Vector2 CandySize = new Vector2(0.7f, 0.7f);
 
     private int score;
@@ -47,6 +47,21 @@ public class ShapesManager : MonoBehaviour
     {
         mainPanel?.SetActive(true);
         gamePanel?.SetActive(false);
+        InitializeTypesOnPrefabShapesAndBonuses();
+    }
+
+    /// <summary>
+    /// Initialize shapes
+    /// </summary>
+    private void InitializeTypesOnPrefabShapesAndBonuses()
+    {
+        foreach (var item in CandyObjects)
+        {
+            //just assign the name of the prefab
+            item.BasePrefab.GetComponent<Shape>().Type = item.name;
+            //assign the name of the respective "normal" candy as the type of the Bonus
+            item.BonusPrefab.GetComponent<Shape>().Type = item.name;
+        }
     }
 
     public void InitializeCandyAndSpawnPositions()
@@ -63,7 +78,6 @@ public class ShapesManager : MonoBehaviour
         {
             for (int column = 0; column < Constants.Columns; column++)
             {
-
                 GameObject newCandy = GetRandomCandy();
 
                 //check if two previous horizontal are of the same type
@@ -95,10 +109,8 @@ public class ShapesManager : MonoBehaviour
 
     private void InstantiateAndPlaceNewCandy(int row, int column, GameObject newCandy)
     {
-        GameObject go = Instantiate(newCandy,
-            BottomRight + new Vector2(column * CandySize.x, row * CandySize.y), Quaternion.identity)
-            as GameObject;
-
+        var go = Instantiate(newCandy,
+            BottomRight + new Vector2(column * CandySize.x, row * CandySize.y), Quaternion.identity);
         //assign the specific properties
         go.GetComponent<Shape>().Assign(newCandy.GetComponent<Shape>().Type, row, column);
         shapes[row, column] = go;
@@ -143,7 +155,6 @@ public class ShapesManager : MonoBehaviour
                     hitGo = hit.collider.gameObject;
                     state = GameState.SelectionStarted;
                 }
-
             }
         }
         else if (state == GameState.SelectionStarted)
@@ -151,8 +162,6 @@ public class ShapesManager : MonoBehaviour
             //user dragged
             if (Input.GetMouseButton(0))
             {
-
-
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 //we have a hit
                 if (hit.collider != null && hitGo != hit.collider.gameObject)
@@ -298,10 +307,10 @@ public class ShapesManager : MonoBehaviour
             as GameObject;
         shapes[hitGoCache.Row, hitGoCache.Column] = Bonus;
         var BonusShape = Bonus.GetComponent<Shape>();
-        
+
         //will have the same type as the "normal" candy
         BonusShape.Assign(hitGoCache.Type, hitGoCache.Row, hitGoCache.Column);
-        
+
         //add the proper Bonus type
         BonusShape.Bonus |= BonusType.DestroyWholeRowColumn;
     }
@@ -357,7 +366,7 @@ public class ShapesManager : MonoBehaviour
     private void RemoveFromScene(GameObject item)
     {
         GameObject explosion = GetRandomExplosion();
-        var newExplosion = Instantiate(explosion, item.transform.position, Quaternion.identity) as GameObject;
+        var newExplosion = Instantiate(explosion, item.transform.position, Quaternion.identity);
         Destroy(newExplosion, Constants.ExplosionDuration);
         Destroy(item);
     }
@@ -406,7 +415,7 @@ public class ShapesManager : MonoBehaviour
     {
         foreach (var candy in CandyObjects)
         {
-            if(candy.BasePrefab.GetComponent<Shape>().Type.Contains(type))
+            if (candy.BasePrefab.GetComponent<Shape>().Type.Contains(type))
                 return candy.BonusPrefab;
         }
         throw new System.Exception("Wrong type");
